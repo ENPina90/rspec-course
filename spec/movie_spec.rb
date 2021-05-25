@@ -46,9 +46,9 @@ RSpec.describe Movie do
   describe '#start_shooting method' do
     it 'expects an actor to do 3 things' do
       expect(stuntman).to receive(:ready?)
-      expect(stuntman).to receive(:act)
-      expect(stuntman).to receive(:fall_off_ladder)
-      expect(stuntman).to receive(:light_on_fire)
+      expect(stuntman).to receive(:act).at_least(2).times # method is invoked at least 2 times
+      expect(stuntman).to receive(:fall_off_ladder).at_most(5).times # method is invoked between 1 and 5 times, but no more.
+      expect(stuntman).to receive(:light_on_fire).exactly(1).times # method invoked exactly once.
       subject.start_shooting
     end
   end
